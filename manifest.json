@@ -1,0 +1,25 @@
+{
+  "name": "rollbar-proguard-decryptor",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "This extension provides a workaround for rollbar not being able to decrypt proguard stacktraces",
+  "homepage_url": "https:/github.com/orbita-center/rollbar-proguard-decryptor",
+  "permissions": [
+    "storage"
+  ],
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://rollbar.com/*/items/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}
