@@ -82,8 +82,9 @@ const decryptOccurence = occurence => {
 		})
 };
 
-String.prototype.replaceAll = function(search, replacement) {
-    return this.split(search).join(replacement);
+String.prototype.replaceAllWords = function(search, replacement) {
+	var target = this;
+    return target.replace(new RegExp(`\\b${search}\\b`, 'g'), replacement);
 };
 
 const decryptStacktrace = (trace, mapping) => {
@@ -93,7 +94,7 @@ const decryptStacktrace = (trace, mapping) => {
 
 	const decryptString = str => Object.keys(mapping)
 		.sort((a, b) => b.length - a.length)
-		.reduce((acc, key) => acc.replaceAll(key, mapping[key].name), str);
+		.reduce((acc, key) => acc.replaceAllWords(key, mapping[key].name), str);
 
 	const decryptException = exception => {
 		if (typeof exception === 'object') {
